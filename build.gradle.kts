@@ -36,6 +36,9 @@ dependencies {
     // Jackson
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleVersion")
 
+    // Database
+    runtimeOnly("org.postgresql:postgresql")
+
     // Test
     testImplementation(starter("test"))
     testImplementation("org.springframework.security:spring-security-test")
