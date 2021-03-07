@@ -1,11 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val springBootVersion: String by project
+val jacksonModuleVersion: String by project
+
 plugins {
-    id("org.springframework.boot") version "2.4.3"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.4.30"
-    kotlin("plugin.spring") version "1.4.30"
-    kotlin("plugin.jpa") version "1.4.30"
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    kotlin("jvm")
+    kotlin("plugin.spring")
+    kotlin("plugin.jpa")
 }
 
 group = "ru.hetcho"
@@ -17,15 +20,24 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    fun starter(module: String, version: String = springBootVersion) = "org.springframework.boot:spring-boot-starter-$module:$version"
+
+    // Kotlin
+    implementation(kotlin("reflect"))
+    implementation(kotlin("stdlib-jdk8"))
+
+    // Spring
+    implementation(starter("web"))
+    implementation(starter("security"))
+    implementation(starter("data-jpa"))
+    implementation(starter("data-mongodb"))
+    implementation(starter("oauth2-client"))
+
+    // Jackson
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleVersion")
+
+    // Test
+    testImplementation(starter("test"))
     testImplementation("org.springframework.security:spring-security-test")
 }
 
