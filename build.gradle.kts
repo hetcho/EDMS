@@ -30,6 +30,7 @@ dependencies {
     implementation(starter("web"))
     implementation(starter("security"))
     implementation(starter("data-jpa"))
+    implementation(starter("thymeleaf"))
     implementation(starter("data-mongodb"))
     implementation(starter("oauth2-client"))
 
