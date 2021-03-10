@@ -23,6 +23,9 @@ class MongoRepository(
     fun delete(id: ObjectId) = db.delete(Query(Criteria.where("_id").`is`(id)))
 
     @Throws(IllegalArgumentException::class)
+    fun deleteAllByIds(ids: Collection<ObjectId>) = db.delete(Query(Criteria.where("_id").`in`(ids)))
+
+    @Throws(IllegalArgumentException::class)
     fun findById(id: ObjectId) = db.findOne(Query(Criteria.where("_id").`is`(id)))
 
     @Throws(IllegalArgumentException::class)
