@@ -1,10 +1,6 @@
 package ru.hetcho.edms.entities
 
 import org.bson.types.ObjectId
-import org.springframework.data.annotation.CreatedBy
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
-import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -14,24 +10,8 @@ data class FileInfo(
     @Column(unique = true)
     val fileId: String,
     @ManyToOne
-    val document: Document,
-    @ManyToOne
-    @CreatedBy
-    override val createdBy: User?,
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    override val createdAt: Date,
-    @ManyToOne
-    @LastModifiedDate
-    override var updatedBy: User?,
-    @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    override var updatedAt: Date
-) : Data {
-
-    @Id
-    @GeneratedValue
-    override var id: Long? = null
+    val document: Document
+) : Data() {
 
     @Transient
     val objectId = ObjectId(fileId)
