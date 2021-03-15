@@ -8,9 +8,9 @@ import javax.persistence.*
 data class Document(
     var title: String,
     @Enumerated(EnumType.STRING)
-    var type: DocumentType
+    var type: DocumentType = DocumentType.PUBLIC
 ) : Data() {
 
-    @OneToMany(cascade = [CascadeType.REMOVE], orphanRemoval = true)
+    @OneToMany(cascade = [CascadeType.REMOVE, CascadeType.PERSIST], orphanRemoval = true)
     val files = mutableListOf<FileInfo>()
 }

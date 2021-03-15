@@ -8,11 +8,7 @@ import javax.persistence.*
 data class FileInfo(
     val filename: String,
     @Column(unique = true)
-    val fileId: String,
+    val objectId: ObjectId,
     @ManyToOne
     val document: Document
-) : Data() {
-
-    @Transient
-    val objectId = ObjectId(fileId)
-}
+) : Data()
