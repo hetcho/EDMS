@@ -15,7 +15,7 @@ import javax.persistence.*
 abstract class Data {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 
     @CreatedDate
